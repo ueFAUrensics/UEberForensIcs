@@ -1,0 +1,61 @@
+##  @file
+#  Memory Forensics Shell Command
+#
+#  Should send all or part of memory to mtftp4 server
+#
+##
+
+[Defines]
+  INF_VERSION         = 1.27
+  BASE_NAME           = ForensicsDynamicCommand
+  FILE_GUID           = b49ab95a-681c-43a3-b507-e5adb6092dd7
+  MODULE_TYPE         = DXE_DRIVER
+  VERSION_STRING      = 1.0
+  ENTRY_POINT         = ForensicsCommandInitialize
+  UNLOAD_IMAGE        = ForensicsUnload
+#
+# This flag specifies whether HII resource section is generated into PE image.
+# (Otherwise the PACKAGE_LIST_PROTOCOL will be unsupported.)
+#
+  UEFI_HII_RESOURCE_SECTION      = TRUE
+
+[Sources]
+  Forensics.uni
+  Forensics.h
+  Forensics.c
+  ForensicsDynamicCommand.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ShellPkg/ShellPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  NetworkPkg/NetworkPkg.dec
+  OvmfPkg/OvmfPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  DebugLib
+  HiiLib
+  MemoryAllocationLib
+  NetLib
+  PcdLib
+  ShellLib
+  TcpIoLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiHiiServicesLib
+  UefiLib
+
+[Protocols]
+  gEfiHiiPackageListProtocolGuid                        ## CONSUMES
+  gEfiManagedNetworkServiceBindingProtocolGuid          ## CONSUMES
+  gEfiShellDynamicCommandProtocolGuid                   ## PRODUCES
+  gEfiTcp4ProtocolGuid                                  ## CONSUMES
+
+[Pcd.common]
+  gUefiOvmfPkgTokenSpaceGuid.PcdForensicsServerIp       ## CONSUMES
+  gUefiOvmfPkgTokenSpaceGuid.PcdForensicsServerPort     ## CONSUMES
+  gUefiOvmfPkgTokenSpaceGuid.PcdForensicsHeaderEnabled  ## CONSUMES
+
+[DEPEX]
+  TRUE

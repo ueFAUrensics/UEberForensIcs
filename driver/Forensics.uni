@@ -1,0 +1,70 @@
+// /**
+//
+// Module Name:
+//
+// Forensics.uni
+//
+// Abstract:
+//
+// String definitions for UEFI Shell Forensics command
+//
+//
+// **/
+
+/=#
+
+#langdef  en-US "english"
+
+#string STR_GEN_PROBLEM                   #language en-US "%H%s%N: Unknown flag - '%H%s%N'\r\n"
+#string STR_GEN_TOO_MANY                  #language en-US "%H%s%N: Too many arguments\r\n"
+#string STR_GEN_PARAM_INV                 #language en-US "%H%s%N: Invalid argument - '%H%s%N'\r\n"
+
+#string STR_FORENSICS_ERR_MEMMAP          #language en-US "Unable to get memory map.\r\n"
+#string STR_FORENSICS_ERR_NO_NIC          #language en-US "No network interface card found.\r\n"
+#string STR_FORENSICS_ERR_CREATE_SOCKET   #language en-US "Creation of the TCP socket failed - %r\r\n"
+#string STR_FORENSICS_ERR_CONFIGURE       #language en-US "Configuration of the TCP instance failed - %r\r\n"
+#string STR_FORENSICS_ERR_EVENT_CREATE    #language en-US "Event creation failed - %r\r\n"
+#string STR_FORENSICS_ERR_TIMER_SET       #language en-US "Unable to set timer - %r\r\n"
+#string STR_FORENSICS_ERR_CONNECTION      #language en-US "Unable to connect to server - %r\r\n"
+#string STR_FORENSICS_ERR_ALLOC           #language en-US "Out of resources\r\n"
+#string STR_FORENSICS_ERR_TRANSMISSION    #language en-US "Transmission failed - %r\r\n"
+#string STR_FORENSICS_ERR_NIC_FAILED      #language en-US "Nic number %d couldn't be used - %r\r\n"
+
+#string STR_FORENSICS_START               #language en-US "Transmission starting.\r\n"
+#string STR_FORENSICS_UNSUCCESSFUL        #language en-US "Transmission unsuccessful.\r\n"
+#string STR_FORENSICS_SUCCESSFUL          #language en-US "Transmission successful.\r\n"
+
+#string STR_GET_HELP_FORENSICS            #language en-US ""
+".TH forensics 0 "Sends memory to TCP4 server."\r\n"
+".SH NAME\r\n"
+"Sends memory to TCP4 server.\r\n"
+".SH SYNOPSIS\r\n"
+" \r\n"
+"FORENSICS [-i <server ip>] [-p <port>]\r\n"
+".SH OPTIONS\r\n"
+" \r\n"
+"  -i server ip     - Specifies the ip of the TCP4 server. Default value\r\n"
+"                     is 192.168.178.64.\r\n"
+"  -s size          - Specifies the port of the TCP4 server. Default value\r\n"
+"                     is 42424.\r\n"
+".SH DESCRIPTION\r\n"
+" \r\n"
+"NOTES:\r\n"
+"  1. The memory is sent as a raw bytestream after establishing the connection.\r\n"
+"  2. To structure the sent memory, LiME memory headers (version 1) are used.\r\n"
+"     This can be switched off at build time.\r\n"
+"  3. The sent memory is divided into ranges according to the memory map in UEFI.\r\n"
+".SH EXAMPLES\r\n"
+" \r\n"
+"EXAMPLES:\r\n"
+"  * To send the memory to server 192.168.1.1, which is\r\n"
+"    accepting connections on port 2222:\r\n"
+"    Shell> forensics -i 192.168.1.1 -p 2222\r\n"
+".SH RETURNVALUES\r\n"
+" \r\n"
+"RETURN VALUES:\r\n"
+"  SHELL_SUCCESS             Command completed as requested.\r\n"
+"  SHELL_INVALID_PARAMETER   One of the passed-in parameters was incorrectly\r\n"
+"                            formatted or its value was out of bounds.\r\n"
+"  SHELL_ABORTED             Command execution aborted by user.\r\n"
+"  SHELL_NOT_FOUND           Command could not be completed with any Nic.\r\n"
